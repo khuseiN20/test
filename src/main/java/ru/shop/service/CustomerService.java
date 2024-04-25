@@ -1,12 +1,16 @@
 package ru.shop.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import ru.shop.exception.EntityNotFoundException;
 import ru.shop.model.Customer;
 import ru.shop.repository.IRepository;
 
 import java.util.List;
+import java.util.UUID;
 
 @RequiredArgsConstructor
+@Service
 public class CustomerService {
 
     private final IRepository<Customer> repository;
@@ -19,4 +23,7 @@ public class CustomerService {
         return repository.findAll();
     }
 
+    public Customer getById(UUID id) {
+        return repository.findById(id).orElseThrow(EntityNotFoundException::new);
+    }
 }

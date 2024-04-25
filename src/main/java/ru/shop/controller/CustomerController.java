@@ -1,25 +1,32 @@
 package ru.shop.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
 import ru.shop.model.Customer;
 import ru.shop.repository.CustomerRepository;
 import ru.shop.service.CustomerService;
 
 import java.util.List;
+import java.util.UUID;
 
 
 @RestController
 @RequestMapping("/customer")
+@RequiredArgsConstructor
 public class CustomerController {
-    CustomerService customerService = new CustomerService(new CustomerRepository());
+    private final CustomerService customerService;
 
     @GetMapping
     public List<Customer> getAllProducts() {
         return  customerService.findAll();
     }
 
-    //5.3
+    @PostMapping
+    public void save(@RequestBody Customer customer) { customerService.save(customer);}
+
+    @GetMapping("/{id}")
+    public Customer getById(@PathVariable UUID id) {
+        return customerService.getById(id);
+    }
 }
 

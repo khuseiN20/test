@@ -1,10 +1,7 @@
 package ru.shop.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.shop.exception.BadOrderCountException;
 import ru.shop.exception.EntityNotFoundException;
 import ru.shop.model.Customer;
@@ -30,9 +27,13 @@ public class ProductController {
         return List.of(new Product(UUID.randomUUID(), "Product1", 99, ProductType.GOOD));
     }
 
+    @PostMapping
+    public void save(@RequestBody Product product) {
+        productService.save(product);
+    }
+
     @GetMapping("/{id}")
     public Product getById(@PathVariable UUID id) {
         return productService.getById(id);
     }
-
 }
