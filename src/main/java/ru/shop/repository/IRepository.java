@@ -10,4 +10,6 @@ public interface IRepository<T> {
     List<T> findAll();
 
     Optional<T> findById(UUID id);
+
+    //List<T> findByCustomerId(UUID customerId);
 }

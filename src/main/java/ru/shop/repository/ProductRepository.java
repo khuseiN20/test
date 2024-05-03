@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import ru.shop.model.Order;
 import ru.shop.model.Product;
 
 import java.util.ArrayList;
@@ -32,5 +33,4 @@ public class ProductRepository implements IRepository<Product> {
                 filter(product -> product.getId().equals(id))
                 .findFirst();
     }
-
 }

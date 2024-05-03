@@ -19,7 +19,6 @@ public class ProductService {
 
     private final IRepository<Product> repository;
 
-
     public void save(Product product) {
         repository.save(product);
     }

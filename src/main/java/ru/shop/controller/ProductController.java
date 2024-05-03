@@ -24,7 +24,8 @@ public class ProductController {
     @GetMapping
     public List<Product> getAllProducts() {
         //return productService.findAll();
-        return List.of(new Product(UUID.randomUUID(), "Product1", 99, ProductType.GOOD));
+        //return List.of(new Product(UUID.randomUUID(), "Product1", 99, ProductType.GOOD));
+        return  productService.findAll();
     }
 
     @PostMapping
@@ -35,5 +36,10 @@ public class ProductController {
     @GetMapping("/{id}")
     public Product getById(@PathVariable UUID id) {
         return productService.getById(id);
+    }
+
+    @GetMapping("/type/{productType}")
+    public List<Product> getByProductType(@PathVariable ProductType productType){
+        return productService.findByProductType(productType);
     }
 }
