@@ -23,7 +23,6 @@ public class OrderService {
         if (count <= 0) {
             throw new BadOrderCountException();
         }
-
         Order order = new Order(UUID.randomUUID(), customer.getId(), product.getId(), count, product.getCost() * count);
         repository.save(order);
     }
