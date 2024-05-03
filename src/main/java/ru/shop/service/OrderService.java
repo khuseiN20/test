@@ -18,16 +18,21 @@ import java.util.UUID;
 public class OrderService {
 
     private final IRepository<Order> repository;
+    private final CustomerService customerService;
+    private final ProductService productService;
 
-    public void add(Customer customer, Product product, long count) {
+    public void add(UUID productId, UUID customerId, int count) {
         if (count <= 0) {
             throw new BadOrderCountException();
         }
+        Customer customer = customerService.getById(customerId);
+        Product product = productService.getById(productId);
         Order order = new Order(UUID.randomUUID(), customer.getId(), product.getId(), count, product.getCost() * count);
         repository.save(order);
     }
 
-    public List<Order> findByCustomer(Customer customer) {
+    public List<Order> findByCustomer(UUID customerId) {
+        Customer customer = customerService.getById(customerId);
         List<Order> result = new ArrayList<>();
         for (Order order : repository.findAll()) {
             if (order.getCustomerId() == customer.getId()) {
@@ -37,9 +42,10 @@ public class OrderService {
         return result;
     }
 
-    public long getTotalCustomerAmount(Customer customer) {
+    public long getTotalCustomerAmount(UUID customerId) {
+        List<Order> customerOrders = findByCustomer(customerId);
         long result = 0;
-        for (Order order : findByCustomer(customer)) {
+        for (Order order : customerOrders) {
             result += order.getAmount();
         }
         return result;

@@ -29,10 +29,4 @@ public class OrderRepository implements IRepository<Order> {
                 filter(order -> order.getId().equals(id))
                 .findFirst();
     }
-
-//    public List<Order> findByCustomerId(UUID customerId){
-//        return findAll().stream()
-//                .filter(order -> order.getCustomerId().equals(customerId))
-//                .toList();
-//    }
 }

@@ -18,8 +18,6 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class OrderController {
     private final OrderService orderService;
-    private final CustomerService customerService;
-    private final ProductService productService;
 
     @GetMapping
     public List<Order> getAllOrders() {
@@ -31,16 +29,21 @@ public class OrderController {
         return orderService.getById(id);
     }
 
-    @GetMapping("/customer/total")
-    public long getCutomerTotal(UUID customerId){
-        Customer customer = customerService.getById(customerId);
-        return orderService.getTotalCustomerAmount(customer);
+    @GetMapping("/customer/{customerId}")
+    public List<Order> getByCustomerId(@PathVariable UUID customerId) {
+        return orderService.findByCustomer(customerId);
+    }
+
+    @GetMapping("/customer/{customerId}/total")
+    public long getCutomerTotal(@RequestParam UUID customerId){
+        return orderService.getTotalCustomerAmount(customerId);
     }
 
     @PostMapping
-    public void save(UUID productId, UUID customerId, int count){
-        Customer customer = customerService.getById(customerId);
-        Product product = productService.getById(productId);
-        orderService.add(customer,product,count);
+    public void save(@RequestParam UUID productId, @RequestParam UUID customerId, @RequestParam int count){
+        orderService.add(productId, customerId, count);
+//        Customer customer = customerService.getById(customerId);
+//        Product product = productService.getById(productId);
+//        orderService.add(customer,product,count);
     }
 }
