@@ -52,5 +52,4 @@ public class OrderService {
     public Order getById(UUID id) {
         return repository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
-
 }
