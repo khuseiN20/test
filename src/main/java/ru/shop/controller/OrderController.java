@@ -42,8 +42,5 @@ public class OrderController {
     @PostMapping
     public void save(@RequestParam UUID productId, @RequestParam UUID customerId, @RequestParam int count){
         orderService.add(productId, customerId, count);
-//        Customer customer = customerService.getById(customerId);
-//        Product product = productService.getById(productId);
-//        orderService.add(customer,product,count);
     }
 }

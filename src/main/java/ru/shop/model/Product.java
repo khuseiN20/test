@@ -10,25 +10,15 @@ import java.util.UUID;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-//public class Product {
-//    UUID id;
-//    String name;
-//    long cost;
-//    ProductType productType;
-//}
 @Entity
 // Задаём таблицы для хранения
 @Table(name = "product")
 public class Product {
-
     // первичный ключ
     @Id
     private UUID id;
-
     private String name;
-
     long cost;
-
     // ENUM храниться в БД как строка
     @Enumerated(EnumType.STRING)
     private ProductType productType;

@@ -14,8 +14,8 @@ import java.util.UUID;
 @Service
 public class CustomerService {
 
-    private final IRepository<Customer> repository;
-    //private final CustomerRepository repository;
+    //private final IRepository<Customer> repository;
+    private final CustomerRepository repository;
 
     public void save(Customer customer) {
         repository.save(customer);

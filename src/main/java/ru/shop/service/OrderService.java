@@ -8,6 +8,7 @@ import ru.shop.model.Customer;
 import ru.shop.model.Order;
 import ru.shop.model.Product;
 import ru.shop.repository.IRepository;
+import ru.shop.repository.OrderRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,8 @@ import java.util.UUID;
 @Service
 public class OrderService {
 
-    private final IRepository<Order> repository;
+    //private final IRepository<Order> repository;
+    private final OrderRepository repository;
     private final CustomerService customerService;
     private final ProductService productService;
 
