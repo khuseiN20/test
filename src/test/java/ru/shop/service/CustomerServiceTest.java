@@ -34,7 +34,7 @@ class CustomerServiceTest {
     }
 
     @Test
-    public void shouldThrowWhenCustomerNotFound() {
+    public void shouldWhenCustomerNotFound() {
         // then
         Assertions.assertThrows(
                 EntityNotFoundException.class,

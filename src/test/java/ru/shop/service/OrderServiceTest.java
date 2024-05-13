@@ -52,5 +52,10 @@ class OrderServiceTest {
         Order notCustomerOrder = new Order(UUID.randomUUID(), UUID.randomUUID(), UUID.randomUUID(), 10,10);
 
         Mockito.when(repository.findAll()).thenReturn(List.of(customerOrder,notCustomerOrder));
+
+        List<Order> result = service.findByCustomer(customer);
+
+        Assertions.assertEquals(1,result.size());
+        Assertions.assertEquals(customerOrder,result.get(0));
     }
 }
