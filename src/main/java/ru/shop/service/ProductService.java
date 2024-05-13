@@ -29,10 +29,6 @@ public class ProductService {
         return repository.findAll();
     }
 
-    public Product getById(@PathVariable UUID id) {
-        return repository.findById(id).orElseThrow(EntityNotFoundException::new);
-    }
-
     public List<Product> findByProductType(ProductType productType) {
         List<Product> result = new ArrayList<>();
         for (Product product : repository.findAll()) {
@@ -42,4 +38,9 @@ public class ProductService {
         }
         return result;
     }
+
+    public Product getById(UUID id) {
+        return repository.findById(id).orElseThrow(EntityNotFoundException::new);
+    }
+
 }

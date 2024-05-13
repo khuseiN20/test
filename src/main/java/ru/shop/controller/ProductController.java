@@ -15,16 +15,15 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/product")
 @RequiredArgsConstructor
+@RequestMapping("/product")
 public class ProductController {
+
     private final ProductService productService;
 
     @GetMapping
-    public List<Product> getAllProducts() {
-        //return productService.findAll();
-        //return List.of(new Product(UUID.randomUUID(), "Product1", 99, ProductType.GOOD));
-        return  productService.findAll();
+    public List<Product> getAll() {
+        return productService.findAll();
     }
 
     @PostMapping
@@ -38,7 +37,8 @@ public class ProductController {
     }
 
     @GetMapping("/type/{productType}")
-    public List<Product> getByProductType(@PathVariable ProductType productType){
+    public List<Product> getByProductType(@PathVariable ProductType productType) {
         return productService.findByProductType(productType);
     }
+
 }

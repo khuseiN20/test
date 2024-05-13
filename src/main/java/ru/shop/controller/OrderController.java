@@ -13,14 +13,17 @@ import ru.shop.service.ProductService;
 import java.util.List;
 import java.util.UUID;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/order")
-@RequiredArgsConstructor
 public class OrderController {
+
     private final OrderService orderService;
+    private final CustomerService customerService;
+    private final ProductService productService;
 
     @GetMapping
-    public List<Order> getAllOrders() {
+    public List<Order> getAll() {
         return orderService.findAll();
     }
 
@@ -29,18 +32,23 @@ public class OrderController {
         return orderService.getById(id);
     }
 
+    @PostMapping
+    public void save(UUID productId, UUID customerId, int count) {
+        Product product = productService.getById(productId);
+        Customer customer = customerService.getById(customerId);
+        orderService.add(customer, product, count);
+    }
+
     @GetMapping("/customer/{customerId}")
-    public List<Order> getByCustomerId(@PathVariable UUID customerId) {
-        return orderService.findByCustomer(customerId);
+    public List<Order> getByCustomerId(UUID customerId) {
+        Customer customer = customerService.getById(customerId);
+        return orderService.findByCustomer(customer);
     }
 
     @GetMapping("/customer/{customerId}/total")
-    public long getCutomerTotal(@RequestParam UUID customerId){
-        return orderService.getTotalCustomerAmount(customerId);
+    public long getCustomerTotal(UUID customerId) {
+        Customer customer = customerService.getById(customerId);
+        return orderService.getTotalCustomerAmount(customer);
     }
 
-    @PostMapping
-    public void save(@RequestParam UUID productId, @RequestParam UUID customerId, @RequestParam int count){
-        orderService.add(productId, customerId, count);
-    }
 }

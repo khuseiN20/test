@@ -17,16 +17,19 @@ public class CustomerController {
     private final CustomerService customerService;
 
     @GetMapping
-    public List<Customer> getAllCustomers() {
-        return  customerService.findAll();
+    public List<Customer> getAll() {
+        return customerService.findAll();
     }
 
     @PostMapping
-    public void save(@RequestBody Customer customer) { customerService.save(customer);}
+    public void save(@RequestBody Customer customer) {
+        customerService.save(customer);
+    }
 
     @GetMapping("/{id}")
     public Customer getById(@PathVariable UUID id) {
         return customerService.getById(id);
     }
+
 }
 
