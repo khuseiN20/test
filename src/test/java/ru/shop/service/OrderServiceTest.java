@@ -58,4 +58,33 @@ class OrderServiceTest {
         Assertions.assertEquals(1,result.size());
         Assertions.assertEquals(customerOrder,result.get(0));
     }
+    @Test
+    public void shouldFindCustomerTotal() {
+        // given
+        UUID customerId = UUID.randomUUID();
+        Customer customer = new Customer(
+                customerId, "name", "phone", 20
+        );
+
+        Order customerOrder = new Order(
+                UUID.randomUUID(), customerId, UUID.randomUUID(), 10, 10
+        );
+        Order customerOrder2 = new Order(
+                UUID.randomUUID(), customerId, UUID.randomUUID(), 10, 20
+        );
+        Order notCustomerOrder = new Order(
+                UUID.randomUUID(), UUID.randomUUID(), UUID.randomUUID(), 10, 10
+        );
+        Mockito.when(repository.findAll())
+                .thenReturn(
+                        List.of(customerOrder, customerOrder2, notCustomerOrder)
+                );
+
+        // when
+        long result = service.getTotalCustomerAmount(customer);
+
+        // then
+        Assertions.assertEquals(30, result);
+    }
+
 }
