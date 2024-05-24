@@ -1,0 +1,19 @@
+Создать сущность возврата товара ProductReturn:
+
+1 Добавить таблицу в БД: product_return(id uuid rimary key, order_id uuid not null, date timestamp not null, quantity int not null)
+2 Реализовать Model: ProductReturn. Поля: ид возврата (UUID id), ид заказа (UUID orderId), дату возврата (LocalDate date), количество товара (quantity)
+3 Реализовать ProductReturnRepository (наследоваться от JpaRepository)
+4 Реализовать ProductReturnService.
+4.1 Реализовать метод добавления возврата public void add(Order order, long count). Если входящий count больше, чем было в заказе, то генерировать ошибку BadProductReturnCountException (ошибку нужно создать)
+
+4.2 Реализовать метод получения получения всех элементов public List<ProductReturn> findAll()
+
+4.3 Реализовать метод получения элемента по id: public ProductReturn findById(UUID id). Если товар не найден, то генерировать ошибку EntityNotFoundException
+
+5.Реализовать Controller с методами
+
+5.1 Получение всех элементов @GetMapping public List<ProductReturn> getAll()
+
+5.2 Получение элемента по id @GetMapping("/{id}") public ProductReturn getById(@PathVariable UUID id)
+
+6.Написать тесты на все public методы сервиса: success path + генерация всех ошибок
