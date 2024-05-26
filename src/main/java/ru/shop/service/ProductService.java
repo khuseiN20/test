@@ -2,12 +2,9 @@ package ru.shop.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import ru.shop.exception.EntityNotFoundException;
 import ru.shop.model.Product;
 import ru.shop.model.ProductType;
-import ru.shop.repository.IRepository;
 import ru.shop.repository.ProductRepository;
 
 import java.util.ArrayList;
